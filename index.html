@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>xingyunOS Official Website - Deep Customization Based on Android 9 | Exclusive System for VMOS Pro</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;}
+:root{
+    --bg-dark:#0a0a0d;
+    --bg-card:#121218;
+    --bg-hover:#1a1a25;
+    --main-blue:#007bff;
+    --light-blue:#3399ff;
+    --text-white:#ffffff;
+    --text-gray:#b0b0b8;
+    --border-color:#252530;
+}
+html{scroll-behavior:smooth;}
+body{
+    background:var(--bg-dark);
+    color:var(--text-white);
+    line-height:1.8;
+    overflow-x:hidden;
+    -webkit-tap-highlight-color:transparent;
+}
+/* Navigation Bar */
+nav{
+    position:sticky;
+    top:0;
+    width:100%;
+    background:rgba(10,10,13,0.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border-color);
+    z-index:999;
+    padding:12px 0;
+}
+.nav-container{
+    max-width:1400px;
+    margin:0 auto;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    color:var(--main-blue);
+    letter-spacing:0.5px;
+}
+.nav-menu{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+.nav-menu a{
+    color:var(--text-white);
+    text-decoration:none;
+    font-size:15px;
+    transition:all 0.3s;
+}
+.nav-menu a:hover{
+    color:var(--main-blue);
+}
+/* Hero Section */
+.hero{
+    max-width:1400px;
+    margin:40px auto;
+    padding:0 20px;
+    text-align:center;
+}
+.hero h1{
+    font-size:38px;
+    margin-bottom:20px;
+    background:linear-gradient(135deg,var(--main-blue),#80bfff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+}
+.hero .slogan{
+    font-size:18px;
+    color:var(--text-gray);
+    margin-bottom:30px;
+    max-width:900px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.hero .btn-group{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+}
+.btn-primary{
+    padding:14px 35px;
+    background:var(--main-blue);
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:all 0.3s;
+    text-decoration:none;
+}
+.btn-primary:hover{
+    background:var(--light-blue);
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,123,255,0.3);
+}
+.btn-secondary{
+    padding:14px 35px;
+    background:var(--bg-card);
+    color:white;
+    border:1px solid var(--border-color);
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:all 0.3s;
+    text-decoration:none;
+}
+.btn-secondary:hover{
+    background:var(--bg-hover);
+    border-color:var(--main-blue);
+    transform:translateY(-2px);
+}
+/* Universal Card Style */
+.section{
+    max-width:1200px;
+    margin:60px auto;
+    padding:0 20px;
+}
+.section-title{
+    font-size:30px;
+    text-align:center;
+    margin-bottom:15px;
+    color:var(--text-white);
+}
+.section-desc{
+    font-size:16px;
+    color:var(--text-gray);
+    text-align:center;
+    margin-bottom:40px;
+    max-width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+.card{
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    border-radius:16px;
+    padding:25px;
+    transition:all 0.3s;
+}
+.card:hover{
+    border-color:var(--main-blue);
+    transform:translateY(-5px);
+    box-shadow:0 10px 30px rgba(0,123,255,0.2);
+}
+.card h3{
+    font-size:22px;
+    margin-bottom:15px;
+    color:var(--main-blue);
+}
+.card p{
+    color:var(--text-gray);
+    font-size:15px;
+    line-height:1.8;
+}
+/* Download Section */
+.download-section{
+    background:var(--bg-card);
+    border-radius:20px;
+    padding:40px 20px;
+    text-align:center;
+    margin:60px auto;
+    max-width:1200px;
+    border:1px solid var(--border-color);
+}
+.download-section h2{
+    font-size:30px;
+    margin-bottom:15px;
+}
+.download-section p{
+    font-size:16px;
+    color:var(--text-gray);
+    margin-bottom:30px;
+}
+.download-btn-group{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+/* Mini Games Section */
+.game-section{
+    margin:60px auto;
+    max-width:1200px;
+    padding:0 20px;
+}
+.game-container{
+    background:var(--bg-card);
+    border-radius:16px;
+    padding:30px 20px;
+    border:1px solid var(--border-color);
+    text-align:center;
+}
+.game-btn-group{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+.game-btn{
+    padding:12px 25px;
+    background:var(--bg-hover);
+    color:white;
+    border:1px solid var(--border-color);
+    border-radius:10px;
+    font-size:15px;
+    cursor:pointer;
+    transition:all 0.3s;
+}
+.game-btn:hover{
+    background:var(--main-blue);
+    border-color:var(--main-blue);
+}
+canvas{
+    border:2px solid var(--border-color);
+    border-radius:10px;
+    background:#000;
+    max-width:100%;
+    margin:0 auto;
+    display:block;
+    touch-action:none;
+}
+/* FAQ Section */
+.faq-item{
+    background:var(--bg-card);
+    border:1px solid var(--border-color);
+    border-radius:12px;
+    margin-bottom:15px;
+    overflow:hidden;
+}
+.faq-question{
+    padding:18px 25px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:all 0.3s;
+}
+.faq-question:hover{
+    background:var(--bg-hover);
+}
+.faq-answer{
+    padding:0 25px 18px;
+    color:var(--text-gray);
+    font-size:15px;
+    line-height:1.8;
+}
+/* Footer */
+footer{
+    background:var(--bg-card);
+    border-top:1px solid var(--border-color);
+    padding:50px 20px 25px;
+    margin-top:80px;
+}
+.footer-container{
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+    margin-bottom:30px;
+}
+.footer-col h4{
+    font-size:18px;
+    margin-bottom:18px;
+    color:var(--main-blue);
+}
+.footer-col a{
+    display:block;
+    color:var(--text-gray);
+    text-decoration:none;
+    margin-bottom:8px;
+    transition:all 0.3s;
+}
+.footer-col a:hover{
+    color:var(--main-blue);
+    padding-left:5px;
+}
+.copyright{
+    text-align:center;
+    color:var(--text-gray);
+    padding-top:25px;
+    border-top:1px solid var(--border-color);
+    font-size:14px;
+}
+/* Modal */
+.modal{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:var(--bg-card);
+    border:1px solid var(--main-blue);
+    border-radius:12px;
+    padding:15px 30px;
+    font-size:16px;
+    color:white;
+    z-index:9999;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    display:none;
+}
+/* Responsive Adaptation */
+@media (max-width:768px){
+    .hero h1{font-size:30px;}
+    .section-title{font-size:24px;}
+    .nav-menu{gap:10px;}
+    .card-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">xingyunOS</div>
+        <div class="nav-menu">
+            <a href="#home">Home</a>
+            <a href="#intro">About</a>
+            <a href="#feature">Features</a>
+            <a href="#download">Download</a>
+            <a href="#game">Mini Games</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero" id="home">
+    <h1>xingyunOS Official Website</h1>
+    <p class="slogan">Deeply customized based on Android 9 Pie, a lightweight, smooth, ad-free exclusive system built for VMOS Pro with full ARM 32/64-bit support. Breathe new life into your virtual machine and experience the ultimate pure Android environment.</p>
+    <div class="btn-group">
+        <a href="#download" class="btn-primary">Download Now</a>
+        <a href="#intro" class="btn-secondary">Learn More</a>
+    </div>
+</div>
+
+<!-- System Introduction Section -->
+<div class="section" id="intro">
+    <h2 class="section-title">System Overview</h2>
+    <p class="section-desc">xingyunOS is a customized Android system exclusively optimized for VMOS Pro. Built on the native Android 9 Pie system, fully adapted for ARM 32/64-bit architectures. It completely solves the pain points of native Android running in virtual machines, such as lag, bloat, and high resource consumption, to create a pure, smooth, and controllable system environment for your virtual machine.</p>
+    
+    <div class="card-grid">
+        <div class="card">
+            <h3>Our Mission & Core Positioning</h3>
+            <p>While the native Android 9 system offers outstanding compatibility and stability, it comes with a large number of redundant pre-installed apps and background services. When running in the VMOS Pro virtual machine environment, these components severely occupy limited memory and CPU resources, resulting in lag, overheating, frame drops, as well as ad pushes and user privacy data collection, failing to deliver a pure user experience.</p>
+            <p>xingyunOS was created to completely solve these pain points. Based on native Android 9, we only retain the most core system functions, cut all useless redundant services and pre-installed apps, and have carried out in-depth performance optimization and exclusive adaptation for the operating scenarios of VMOS Pro. This allows the system to run extremely smoothly even in the virtual machine, while we promise permanent ad-free, no pre-installed bloatware, no privacy collection, and full control of the system is completely handed over to the user.</p>
+        </div>
+        <div class="card">
+            <h3>Core Advantages of Android 9 Base</h3>
+            <p>We chose Android 9 Pie as the system base because it is one of the most compatible, stable, and well-received versions in Android history. It has excellent adaptability to the VMOS Pro virtual machine environment, and will not have compatibility issues that occur in higher Android versions, providing users with a stable and reliable operating foundation.</p>
+            <p>At the same time, Android 9 has a mature permission control mechanism and a complete application ecosystem. Almost all Android apps can run perfectly on Android 9, whether it is daily social, entertainment apps, or tool and game apps, you can get a stable operating experience without crashes or abnormal functions, perfectly meeting the various usage scenario requirements of VMOS Pro. Based on native Android 9, we have carried out in-depth streamlining and optimization, which greatly reduces the system's memory and storage space occupation, allowing the virtual machine to also get a silky smooth operating experience.</p>
+        </div>
+        <div class="card">
+            <h3>Exclusive Architecture Adaptation for VMOS Pro</h3>
+            <p>xingyunOS is built exclusively for VMOS Pro, fully supports both ARM 32-bit and ARM 64-bit dual architectures. Whether you are using an older 32-bit VMOS Pro virtual machine or the latest 64-bit version, it can be installed and run perfectly without worrying about architecture incompatibility.</p>
+            <p>We have carried out special performance optimization for VMOS Pro virtual machines of different architectures: for the 32-bit version, we have achieved extreme streamlining to further reduce system resource occupation, so that older configurations can also run smoothly; for the 64-bit version, we have improved performance to give full play to the performance advantages of the 64-bit architecture, making the system run more smoothly and multi-task processing more powerful.</p>
+            <p>At the same time, we have fully adapted to the image import mechanism of VMOS Pro, no complicated configuration is required, and it can be used with one click after downloading the image, which greatly reduces the user's threshold for use.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Core Features Section -->
+<div class="section" id="feature">
+    <h2 class="section-title">Core Features</h2>
+    <p class="section-desc">Based on native Android 9, we have carried out full-dimensional optimization and customization. Every feature is polished for VMOS Pro scenarios, just to bring you the best virtual machine experience.</p>
+    
+    <div class="card-grid">
+        <div class="card">
+            <h3>Ultra-Lightweight & Smooth Performance</h3>
+            <p>xingyunOS has carried out in-depth streamlining of the native Android 9 system, cutting all useless pre-installed apps, redundant system services and background processes, greatly reducing the size of the system installation package, and significantly reducing the system's storage space and memory occupation.</p>
+            <p>Aiming at the operating mechanism of VMOS Pro, we have optimized the system's process scheduling mechanism, giving priority to ensuring the resource occupation of foreground applications, preventing useless background processes from seizing resources, and optimizing the system's memory recycling strategy, which can release useless memory space in a timely manner. Even devices with lower configurations running VMOS Pro can get a silky smooth operating experience, completely solving the problem of virtual machine lag and frame drops.</p>
+        </div>
+        <div class="card">
+            <h3>Permanently Clean, Ad-Free & Bloatware-Free</h3>
+            <p>We solemnly promise that xingyunOS is permanently ad-free, no pre-installed bloatware, no bundled software. The system itself does not have any built-in ads, will not push commercial promotion information on any interface, and will not pop up ad windows in the notification bar, creating an absolutely clean and refreshing system environment for you.</p>
+            <p>The system only pre-installs a very small number of necessary basic tools, will not pre-install any third-party apps that users do not need, and will not bundle and install irrelevant software when users install apps. The control of the system is completely handed over to the user, you can freely choose to install the required apps according to your own needs, without being occupied by useless software.</p>
+        </div>
+        <div class="card">
+            <h3>Comprehensive Privacy & Security Protection</h3>
+            <p>Based on the permission control of native Android 9, we have further upgraded the privacy and security protection system, reconstructed the system's permission management mechanism. All sensitive permissions of apps, including contacts, location information, camera, microphone, storage, call records, etc., must be manually authorized by the user before they can be used.</p>
+            <p>Users can view and modify the permissions of each app at any time, and even provide blank permission information to the app, so that the app cannot obtain real user data, fundamentally preventing the app's permission abuse and privacy theft. At the same time, the system completely removes the data collection and tracking code in native Android, and will not collect any user usage data, truly achieving zero tracking and zero collection.</p>
+        </div>
+        <div class="card">
+            <h3>Exclusive Deep Optimization for VMOS Pro</h3>
+            <p>xingyunOS is built exclusively for VMOS Pro scenarios, with a lot of exclusive optimizations, which completely solve various pain points of native Android running in virtual machines. We have optimized the system's startup process, greatly shortening the boot time of VMOS Pro, it only takes a few seconds from startup to entering the system desktop, no need to wait for a long time.</p>
+            <p>We have optimized the system's resource occupation, reduced the system's CPU and memory occupation, reduced the heating and lag of the virtual machine, and optimized the file read and write performance of the virtual machine, improved the installation and startup speed of apps, so that apps can be opened and responded in seconds. In addition, we have also made exclusive adaptation for the windowed operation of VMOS Pro, optimized the display effect and operation experience in windowed mode, and perfectly adapted to different screen resolutions.</p>
+        </div>
+        <div class="card">
+            <h3>Ultimate Compatibility & Full App Support</h3>
+            <p>xingyunOS, built based on the Android 9 Pie system, has ultimate app compatibility. Almost all Android apps can run perfectly in the system, whether it is daily social, entertainment, office apps, or various tool and game apps, they can run stably without crashes or incompatibility issues.</p>
+            <p>We have made special adaptations for the operation of various special apps in the VMOS Pro environment, solved the problem that some apps cannot run or crash in the virtual machine, and retained the complete API interface of Android 9, which will not cause abnormal app functions due to system streamlining, perfectly meeting the various needs of users such as daily use, app testing, and game idling.</p>
+        </div>
+        <div class="card">
+            <h3>Highly Customizable & Full Freedom</h3>
+            <p>xingyunOS provides users with a high degree of freedom in personalized customization. You can freely modify the system's theme, wallpaper, icon style, font, boot animation, etc. according to your own preferences, to create a completely own system interface.</p>
+            <p>We have opened the advanced permissions of the system, allowing users to carry out in-depth customization and modification of the system. You can freely turn on or off various functions of the system according to your own needs, streamline unnecessary components, and further reduce the system's resource occupation. For users with certain technical capabilities, we also support secondary development of the system, you can build your own exclusive customized system based on xingyunOS.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Download Center Section -->
+<div class="download-section" id="download">
+    <h2>Download Now</h2>
+    <p>Current Latest Version: xingyunOS 1.0 Stable | Deeply Customized Based on Android 9 | For VMOS Pro Only | ARM 32/64-bit Supported | Updated: March 19, 2026</p>
+    <p>Only the current 1.0 stable version is available, no previous versions. Click the corresponding cloud disk button below to download the system image file. After clicking, it will automatically jump to the download page and copy the extraction code at the same time.</p>
+    <div class="download-btn-group">
+        <button class="btn-primary" onclick="openTianyi()">Tianyi Cloud Download</button>
+        <button class="btn-primary" onclick="open123Pan()">123 Pan Download</button>
+    </div>
+</div>
+
+<!-- Mini Games Section -->
+<div class="game-section" id="game">
+    <h2 class="section-title">Mini Games</h2>
+    <p class="section-desc">Relax and unwind during breaks from work and study. Built-in classic Snake and Minesweeper games, no installation required, playable right in your browser, fully optimized for touch controls.</p>
+    <div class="game-container">
+        <div class="game-btn-group">
+            <button class="game-btn" onclick="startSnake()">Snake</button>
+            <button class="game-btn" onclick="startMine()">Minesweeper</button>
+        </div>
+        <canvas id="gameCanvas" width="360" height="360"></canvas>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="section" id="faq">
+    <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
+    <p class="section-desc">Here are the most frequently asked questions by users. If you encounter other problems during use, you can give feedback through official channels.</p>
+    
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Is xingyunOS free? Will there be any charges in the future?</span>
+        </div>
+        <div class="faq-answer">
+            <p>xingyunOS is a completely free customized system. Individual users can download, use and modify it for free without any fees. We will not launch a paid version in the future. We promise that the system is permanently free, permanently ad-free, and permanently free of bundled software.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Which virtual machines does xingyunOS support? Can I use it with my VMOS Pro?</span>
+        </div>
+        <div class="faq-answer">
+            <p>xingyunOS is an exclusive customized system for VMOS Pro, only supports VMOS Pro virtual machines, and is compatible with all versions of VMOS Pro. As long as your VMOS Pro supports importing custom images and supports ARM 32-bit or 64-bit architecture, you can use xingyunOS perfectly.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Will installing xingyunOS affect the system of my real device?</span>
+        </div>
+        <div class="faq-answer">
+            <p>Absolutely not. xingyunOS is a system specially built for virtual machines, it will only run in the VMOS Pro environment, completely isolated from your real device system, and will not have any impact on the system, data and files of your real device. You can install and use it with confidence.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Does xingyunOS support root access?</span>
+        </div>
+        <div class="faq-answer">
+            <p>Yes, xingyunOS has full root access enabled by default. You can directly use apps and tools that require root permissions without additional root operations. At the same time, we have retained the adaptation capability for Magisk, you can install Magisk modules according to your own needs to further expand the system functions.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>I'm a newbie, what should I do if I don't know how to import the image into VMOS Pro?</span>
+        </div>
+        <div class="faq-answer">
+            <p>We have prepared a detailed step-by-step image import guide exclusively for VMOS Pro for new users. Even if you are a newbie who has never used a virtual machine before, you can complete the import according to the guide and enable xingyunOS with one click. If you encounter problems during the import process, you can also give feedback through official channels, and we will try our best to help you.</p>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">
+            <span>Will the system be continuously updated?</span>
+        </div>
+        <div class="faq-answer">
+            <p>We will continue to update and maintain xingyunOS, continuously optimize the performance and compatibility of the system, fix known issues, and add more practical functions according to user feedback to bring users a better experience. Subsequent updates can be completed with one click in the system settings, no need to re-import the image.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>About xingyunOS</h4>
+            <a href="#intro">System Introduction</a>
+            <a href="#feature">Core Features</a>
+            <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+            <h4>Download Center</h4>
+            <a href="#download">Latest Version Download</a>
+            <a href="#">VMOS Pro Image Import Guide</a>
+            <a href="#">Previous Versions</a>
+        </div>
+        <div class="footer-col">
+            <h4>User Support</h4>
+            <a href="#">User Guide</a>
+            <a href="#">Feedback</a>
+            <a href="#">User Community</a>
+        </div>
+        <div class="footer-col">
+            <h4>Follow Us</h4>
+            <a href="https://github.com/xingyunOS-your/xingyunOS">GitHub Repository</a>
+            <a href="mailto:3835347820@qq.com">Developer Email</a>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>© 2026 xingyunOS Official Website. All Rights Reserved | Deeply Customized Based on Android 9 | Exclusive System for VMOS Pro</p>
+    </div>
+</footer>
+
+<!-- Tip Modal -->
+<div class="modal" id="tipModal">Access code copied</div>
+
+<script>
+// Modal Tip
+const modal = document.getElementById("tipModal");
+function showTip(text){
+    modal.innerText = text;
+    modal.style.display = "block";
+    setTimeout(()=>{
+        modal.style.display = "none";
+    }, 2000);
+}
+
+// Cloud Disk Jump Logic
+function openTianyi(){
+    window.open("https://cloud.189.cn/t/be267fBzaYFr","_blank");
+    try{
+        navigator.clipboard.writeText("wsn7").then(()=>{
+            showTip("Access code copied");
+        }).catch(()=>{
+            showTip("Redirect successful, access code: wsn7");
+        });
+    }catch(e){
+        showTip("Redirect successful, access code: wsn7");
+    }
+}
+
+function open123Pan(){
+    window.open("https://www.123865.com/s/BotTvd-h6T1?pwd=xVSp#","_blank");
+    try{
+        navigator.clipboard.writeText("xVSp").then(()=>{
+            showTip("Extraction code copied");
+        }).catch(()=>{
+            showTip("Redirect successful, extraction code: xVSp");
+        });
+    }catch(e){
+        showTip("Redirect successful, extraction code: xVSp");
+    }
+}
+
+// FAQ Collapse Function
+const faqQuestions = document.querySelectorAll(".faq-question");
+faqQuestions.forEach(question=>{
+    question.addEventListener("click",()=>{
+        const answer = question.nextElementSibling;
+        answer.style.display = answer.style.display === "block" ? "none" : "block";
+    });
+    faqQuestions[0].nextElementSibling.style.display = "block";
+});
+
+// Snake Game - Touch Optimized
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+let snakeInterval = null;
+let mineInterval = null;
+const gridSize = 18;
+const tileCount = canvas.width / gridSize;
+
+function startSnake(){
+    clearInterval(snakeInterval);
+    clearInterval(mineInterval);
+    let snake = [{x:10, y:10}];
+    let dx = 1;
+    let dy = 0;
+    let food = {x:15, y:15};
+    let score = 0;
+
+    function draw(){
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        
+        ctx.fillStyle = "#00ff00";
+        snake.forEach(segment=>{
+            ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize-2, gridSize-2);
+        });
+        
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize-2, gridSize-2);
+        
+        ctx.fillStyle = "#fff";
+        ctx.font = "16px Arial";
+        ctx.fillText("Score: " + score, 10, 20);
+    }
+
+    function move(){
+        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        
+        if(head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount){
+            alert("Game Over! Your Score: " + score);
+            clearInterval(snakeInterval);
+            return;
+        }
+        
+        for(let i=0; i<snake.length; i++){
+            if(snake[i].x === head.x && snake[i].y === head.y){
+                alert("Game Over! Your Score: " + score);
+                clearInterval(snakeInterval);
+                return;
+            }
+        }
+        
+        snake.unshift(head);
+        
+        if(head.x === food.x && head.y === food.y){
+            score += 10;
+            food = {
+                x: Math.floor(Math.random() * tileCount),
+                y: Math.floor(Math.random() * tileCount)
+            };
+        }else{
+            snake.pop();
+        }
+        
+        draw();
+    }
+
+    // Keyboard Control
+    document.onkeydown = function(e){
+        if(e.key === "ArrowRight" && dx !== -1){
+            dx = 1;
+            dy = 0;
+        }
+        if(e.key === "ArrowLeft" && dx !== 1){
+            dx = -1;
+            dy = 0;
+        }
+        if(e.key === "ArrowDown" && dy !== -1){
+            dx = 0;
+            dy = 1;
+        }
+        if(e.key === "ArrowUp" && dy !== 1){
+            dx = 0;
+            dy = -1;
+        }
+    }
+
+    // Touch Swipe Control
+    let touchStartX = 0;
+    let touchStartY = 0;
+    canvas.addEventListener("touchstart", function(e){
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        e.preventDefault();
+    });
+    canvas.addEventListener("touchend", function(e){
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        
+        if(Math.abs(diffX) > Math.abs(diffY)){
+            if(diffX > 0 && dx !== -1){
+                dx = 1;
+                dy = 0;
+            }
+            if(diffX < 0 && dx !== 1){
+                dx = -1;
+                dy = 0;
+            }
+        }else{
+            if(diffY > 0 && dy !== -1){
+                dx = 0;
+                dy = 1;
+            }
+            if(diffY < 0 && dy !== 1){
+                dx = 0;
+                dy = -1;
+            }
+        }
+        e.preventDefault();
+    });
+
+    snakeInterval = setInterval(move, 150);
+    draw();
+}
+
+// Minesweeper Game - Touch Optimized
+function startMine(){
+    clearInterval(snakeInterval);
+    clearInterval(mineInterval);
+    const mineGrid = 18;
+    const mineTotal = 20;
+    const mineTile = canvas.width / mineGrid;
+    let board = [];
+    let revealed = [];
+    let flagged = [];
+    let gameOver = false;
+    let win = false;
+
+    function initBoard(){
+        board = Array(mineTile).fill().map(()=>Array(mineTile).fill(0));
+        revealed = Array(mineTile).fill().map(()=>Array(mineTile).fill(false));
+        flagged = Array(mineTile).fill().map(()=>Array(mineTile).fill(false));
+        
+        let minesPlaced = 0;
+        while(minesPlaced < mineTotal){
+            const x = Math.floor(Math.random() * mineTile);
+            const y = Math.floor(Math.random() * mineTile);
+            if(board[x][y] !== -1){
+                board[x][y] = -1;
+                minesPlaced++;
+            }
+        }
+        
+        for(let x=0; x<mineTile; x++){
+            for(let y=0; y<mineTile; y++){
+                if(board[x][y] === -1) continue;
+                let count = 0;
+                for(let dx=-1; dx<=1; dx++){
+                    for(let dy=-1; dy<=1; dy++){
+                        const nx = x + dx;
+                        const ny = y + dy;
+                        if(nx >=0 && nx < mineTile && ny >=0 && ny < mineTile && board[nx][ny] === -1){
+                            count++;
+                        }
+                    }
+                }
+                board[x][y] = count;
+            }
+        }
+    }
+
+    function draw(){
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        
+        for(let x=0; x<mineTile; x++){
+            for(let y=0; y<mineTile; y++){
+                ctx.strokeStyle = "#444";
+                ctx.strokeRect(x * mineGrid, y * mineGrid, mineGrid, mineGrid);
+                
+                if(revealed[x][y]){
+                    if(board[x][y] === -1){
+                        ctx.fillStyle = "#ff0000";
+                        ctx.fillRect(x * mineGrid, y * mineGrid, mineGrid, mineGrid);
+                        ctx.fillStyle = "#fff";
+                        ctx.font = "14px Arial";
+                        ctx.fillText("💣", x*mineGrid + 3, y*mineGrid + 15);
+                    }else{
+                        ctx.fillStyle = "#222";
+                        ctx.fillRect(x * mineGrid, y * mineGrid, mineGrid, mineGrid);
+                        if(board[x][y] > 0){
+                            const colors = ["#fff", "#00ff00", "#0099ff", "#ff00ff", "#ffff00", "#ff6600", "#ff0000", "#cc0000", "#990000"];
+                            ctx.fillStyle = colors[board[x][y]];
+                            ctx.font = "14px Arial";
+                            ctx.fillText(board[x][y], x*mineGrid + 6, y*mineGrid + 14);
+                        }
+                    }
+                }else if(flagged[x][y]){
+                    ctx.fillStyle = "#ffcc00";
+                    ctx.fillRect(x * mineGrid, y * mineGrid, mineGrid, mineGrid);
+                    ctx.fillStyle = "#000";
+                    ctx.font = "14px Arial";
+                    ctx.fillText("🚩", x*mineGrid + 3, y*mineGrid + 15);
+                }else{
+                    ctx.fillStyle = "#333";
+                    ctx.fillRect(x * mineGrid, y * mineGrid, mineGrid, mineGrid);
+                }
+            }
+        }
+        
+        if(gameOver){
+            ctx.fillStyle = "rgba(0,0,0,0.75)";
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "#fff";
+            ctx.font = "28px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText(win ? "You Win!" : "Game Over!", canvas.width/2, canvas.height/2);
+            ctx.font = "14px Arial";
+            ctx.fillText("Tap to restart", canvas.width/2, canvas.height/2 + 30);
+        }
+    }
+
+    function reveal(x,y){
+        if(x <0 || x >= mineTile || y <0 || y >= mineTile || revealed[x][y] || flagged[x][y] || gameOver) return;
+        
+        revealed[x][y] = true;
+        
+        if(board[x][y] === -1){
+            gameOver = true;
+            win = false;
+            for(let i=0; i<mineTile; i++){
+                for(let j=0; j<mineTile; j++){
+                    if(board[i][j] === -1) revealed[i][j] = true;
+                }
+            }
+            draw();
+            return;
+        }
+        
+        if(board[x][y] === 0){
+            for(let dx=-1; dx<=1; dx++){
+                for(let dy=-1; dy<=1; dy++){
+                    reveal(x+dx, y+dy);
+                }
+            }
+        }
+        
+        let revealedCount = 0;
+        for(let i=0; i<mineTile; i++){
+            for(let j=0; j<mineTile; j++){
+                if(revealed[i][j]) revealedCount++;
+            }
+        }
+        if(revealedCount === mineTile * mineTile - mineTotal){
+            gameOver = true;
+            win = true;
+        }
+        
+        draw();
+    }
+
+    // Click to Reveal
+    canvas.addEventListener("click", function(e){
+        if(gameOver){
+            initBoard();
+            draw();
+            return;
+        }
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor((e.clientX - rect.left) / mineGrid);
+        const y = Math.floor((e.clientY - rect.top) / mineGrid);
+        reveal(x,y);
+    });
+
+    // Right Click to Flag
+    canvas.addEventListener("contextmenu", function(e){
+        e.preventDefault();
+        if(gameOver) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor((e.clientX - rect.left) / mineGrid);
+        const y = Math.floor((e.clientY - rect.top) / mineGrid);
+        if(!revealed[x][y]){
+            flagged[x][y] = !flagged[x][y];
+            draw();
+        }
+    });
+
+    // Touch Long Press to Flag
+    let touchTime = 0;
+    canvas.addEventListener("touchstart", function(e){
+        touchTime = Date.now();
+        e.preventDefault();
+    });
+    canvas.addEventListener("touchend", function(e){
+        e.preventDefault();
+        if(gameOver){
+            initBoard();
+            draw();
+            return;
+        }
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        const x = Math.floor((touch.clientX - rect.left) / mineGrid);
+        const y = Math.floor((touch.clientY - rect.top) / mineGrid);
+        const touchDiff = Date.now() - touchTime;
+        
+        if(touchDiff < 200){
+            reveal(x,y);
+        }else{
+            if(!revealed[x][y]){
+                flagged[x][y] = !flagged[x][y];
+                draw();
+            }
+        }
+    });
+
+    initBoard();
+    draw();
+}
+</script>
+</body>
+</html>
