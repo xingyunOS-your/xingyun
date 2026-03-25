@@ -1,717 +1,471 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>专业抑郁状态测评系统</title>
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Microsoft YaHei",sans-serif;
-}
-body{
-  background:#f5f7fa;
-  color:#222;
-  line-height:1.7;
-  padding-bottom:50px;
-}
-.container{
-  max-width:900px;
-  margin:0 auto;
-  padding:20px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>地球 Only | 超越维度的沉浸式体验</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* 首页 */
-#home{
-  display:block;
-}
-.title-box{
-  background:#fff;
-  border-radius:16px;
-  padding:30px 24px;
-  text-align:center;
-  margin-bottom:24px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.06);
-}
-.title-box h1{
-  font-size:24px;
-  margin-bottom:8px;
-  color:#1f2937;
-}
-.title-box p{
-  color:#6b7280;
-  font-size:15px;
-}
+        :root {
+            --primary-gradient: linear-gradient(135deg, #001440 0%, #000a1a 40%, #000000 100%);
+            --accent-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            --glow-color: rgba(0, 166, 255, 0.35);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-dim: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(0, 10, 30, 0.6);
+            --glass-bg: rgba(0, 20, 60, 0.25);
+            --shadow-depth: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --fps-glow: 0 0 20px rgba(0, 220, 255, 0.6), 0 0 40px rgba(0, 180, 255, 0.4);
+            --button-shine: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
 
-.intro-box{
-  background:#fff;
-  border-radius:16px;
-  padding:24px;
-  margin-bottom:24px;
-}
-.intro-box h2{
-  font-size:18px;
-  margin-bottom:12px;
-}
-.intro-box p{
-  color:#4b5563;
-  margin-bottom:8px;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-attachment: fixed;
+        }
 
-.age-select{
-  display:flex;
-  gap:16px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin:30px 0;
-}
-.btn{
-  padding:16px 30px;
-  border:none;
-  border-radius:12px;
-  font-size:16px;
-  font-weight:500;
-  cursor:pointer;
-  transition:0.2s;
-}
-.btn-under-18{
-  background:#0ea5e9;
-  color:#fff;
-}
-.btn-adult{
-  background:#2563eb;
-  color:#fff;
-}
-.btn-history{
-  width:100%;
-  background:#f3f4f6;
-  color:#374151;
-  margin-top:10px;
-}
-.btn:hover{
-  opacity:0.92;
-}
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(0, 120, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(0, 200, 255, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
 
-.disclaimer{
-  text-align:center;
-  font-size:12px;
-  color:#9ca3af;
-  margin-top:20px;
-}
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-/* 问卷页面 */
-#quiz-page{
-  display:none;
-}
-.quiz-header{
-  background:#fff;
-  border-radius:16px;
-  padding:20px;
-  text-align:center;
-  margin-bottom:20px;
-}
-.quiz-header h2{
-  font-size:20px;
-}
-.questions-box{
-  background:#fff;
-  border-radius:16px;
-  padding:24px;
-}
-.question-item{
-  margin-bottom:22px;
-  padding-bottom:16px;
-  border-bottom:1px solid #f0f0f0;
-}
-.question-text{
-  font-weight:500;
-  margin-bottom:12px;
-}
-.options{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.option{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 12px;
-  background:#f9fafb;
-  border-radius:8px;
-  cursor:pointer;
-}
-.option:hover{
-  background:#f3f4f6;
-}
+        .main-title {
+            font-size: clamp(3.2rem, 8vw, 6.5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            text-align: center;
+            line-height: 1.1;
+            animation: titleGlow 6s ease-in-out infinite alternate;
+        }
 
-.btn-submit{
-  width:100%;
-  padding:18px;
-  background:#2563eb;
-  color:#fff;
-  border:none;
-  border-radius:12px;
-  font-size:17px;
-  margin-top:24px;
-  cursor:pointer;
-}
-.btn-back{
-  background:#f3f4f6;
-  color:#333;
-  padding:12px 20px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  margin-bottom:16px;
-}
+        @keyframes titleGlow {
+            from { filter: brightness(1) drop-shadow(0 0 12px var(--glow-color)); }
+            to { filter: brightness(1.2) drop-shadow(0 0 24px var(--glow-color)); }
+        }
 
-/* 结果页面 */
-#result-page{
-  display:none;
-}
-.result-card{
-  background:#fff;
-  border-radius:16px;
-  padding:30px 24px;
-  text-align:center;
-  margin-bottom:24px;
-}
-.result-score{
-  font-size:46px;
-  font-weight:bold;
-  margin:16px 0;
-}
-.result-level{
-  font-size:20px;
-  font-weight:500;
-  margin-bottom:12px;
-}
-.result-desc{
-  color:#4b5563;
-  margin-bottom:12px;
-}
+        .subtitle {
+            font-size: clamp(1rem, 2.2vw, 1.3rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 60px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
 
-.advice-box{
-  background:#fffbeb;
-  border-left:4px solid #f59e0b;
-  padding:20px;
-  border-radius:8px;
-  margin-bottom:20px;
-}
-.advice-box h3{
-  color:#92400e;
-  margin-bottom:10px;
-}
-.advice-box p{
-  color:#78350f;
-  line-height:1.8;
-}
+        .server-selector {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 52px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-.result-btns{
-  display:flex;
-  gap:12px;
-}
-.result-btns button{
-  flex:1;
-  padding:14px;
-  border-radius:10px;
-  border:none;
-  font-size:16px;
-  cursor:pointer;
-}
-.btn-to-home{
-  background:#f3f4f6;
-  color:#374151;
-}
-.btn-to-history{
-  background:#2563eb;
-  color:#fff;
-}
+        .server-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px 36px;
+            min-width: 200px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-depth);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* 历史记录页面 */
-#history-page{
-  display:none;
-}
-.history-list{
-  background:#fff;
-  border-radius:16px;
-  padding:20px;
-}
-.history-item{
-  padding:16px;
-  border-bottom:1px solid #f0f0f0;
-}
-.history-item:last-child{
-  border-bottom:none;
-}
-.history-type{
-  font-weight:500;
-  margin-bottom:4px;
-}
-.history-time{
-  font-size:13px;
-  color:#6b7280;
-  margin-bottom:6px;
-}
-.history-score{
-  font-weight:bold;
-  color:#2563eb;
-}
-.history-level{
-  font-size:14px;
-  color:#4b5563;
-}
-.empty-history{
-  text-align:center;
-  padding:40px 20px;
-  color:#9ca3af;
-}
-.btn-clear{
-  width:100%;
-  padding:14px;
-  background:#fee2e2;
-  color:#dc2626;
-  border:none;
-  border-radius:10px;
-  margin-top:16px;
-  cursor:pointer;
-}
-</style>
+        .server-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--button-shine);
+            transition: left 0.6s ease;
+        }
+
+        .server-card:hover::before {
+            left: 100%;
+        }
+
+        .server-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            border-color: rgba(0, 166, 255, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-color);
+        }
+
+        .server-card.active {
+            border-color: #00a6ff;
+            background: rgba(0, 30, 80, 0.7);
+        }
+
+        .server-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .server-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .start-button {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 20px 64px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 24px rgba(0, 114, 255, 0.3), 0 0 0 rgba(0, 198, 255, 0);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 32px;
+            letter-spacing: 0.02em;
+        }
+
+        .start-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .start-button:hover::after {
+            opacity: 1;
+        }
+
+        .start-button:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 14px 36px rgba(0, 114, 255, 0.45), 0 0 24px rgba(0, 198, 255, 0.35);
+        }
+
+        .start-button:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        .start-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #camera-view {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 24px;
+            object-fit: cover;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7);
+            display: none;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        #camera-view.active {
+            display: block;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .fps-counter {
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00dcff;
+            text-shadow: var(--fps-glow);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 20px;
+            border-radius: 999px;
+            backdrop-filter: blur(6px);
+            z-index: 10;
+            display: none;
+            letter-spacing: 0.04em;
+        }
+
+        .fps-counter.active {
+            display: block;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 24px;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-sphere {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            filter: blur(2px);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .loading-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .permission-toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 18px 32px;
+            border-radius: 16px;
+            color: white;
+            font-size: 1rem;
+            box-shadow: var(--shadow-depth);
+            border: 1px solid var(--border-color);
+            z-index: 999;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .permission-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .info-section {
+            margin-top: 80px;
+            max-width: 800px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding: 0 16px;
+        }
+
+        .info-section strong {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+            .server-selector {
+                gap: 16px;
+            }
+            .server-card {
+                padding: 20px 28px;
+                min-width: 150px;
+            }
+            .start-button {
+                padding: 18px 48px;
+                font-size: 1.2rem;
+            }
+            .fps-counter {
+                font-size: 1rem;
+                padding: 6px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- 首页 -->
-  <div id="home">
-    <div class="title-box">
-      <h1>专业抑郁状态测评系统</h1>
-      <p>100题专业评估 | 本地历史记录 | 严格标准分级</p>
+    <div class="loading-overlay" id="loader">
+        <div class="loader-sphere"></div>
+        <div class="loading-text">正在初始化地球 Only 系统...</div>
     </div>
 
-    <div class="intro-box">
-      <h2>测评说明</h2>
-      <p>• 本测评共 100 题，根据近两周真实状态作答。</p>
-      <p>• 分为【18岁以下版】和【18岁以上成人版】，题目完全不同。</p>
-      <p>• 分数标准：</p>
-      <p>✅ 90分以上：完全无抑郁</p>
-      <p>⚠️ 80~89分：轻度抑郁</p>
-      <p>⚠️ 70~79分：中度抑郁</p>
-      <p>⚠️ 60~69分：中上度抑郁</p>
-      <p>🆘 60分以下：高度抑郁</p>
-      <p>• 所有测评记录自动保存，可在历史记录中查看。</p>
+    <div class="permission-toast" id="toast">请授权摄像头权限以进入游戏</div>
+
+    <div class="container">
+        <h1 class="main-title">地球 Only</h1>
+        <p class="subtitle">超高清实时渲染系统 · 19000帧极致流畅体验 · 跨越现实与虚拟的边界</p>
+
+        <div class="server-selector">
+            <div class="server-card active" data-server="official">
+                <div class="server-name">正式服</div>
+                <div class="server-desc">稳定 · 高清 · 原版</div>
+            </div>
+            <div class="server-card" data-server="human">
+                <div class="server-name">人类服</div>
+                <div class="server-desc">社交 · 扩展 · 多元</div>
+            </div>
+        </div>
+
+        <button class="start-button" id="startBtn">开始游戏</button>
+
+        <video id="camera-view" autoplay playsinline muted></video>
+        <div class="fps-counter" id="fps">当前帧率：19000 帧 | 超高清画质已启用</div>
+
+        <div class="info-section">
+            <strong>地球 Only</strong> 是基于下一代实时视觉引擎构建的沉浸式交互系统。
+            本程序通过调用设备摄像头实现现实世界的超高帧率捕捉与实时增强，帧率锁定为19000帧以确保画面无任何撕裂、延迟或卡顿现象。
+            所有视觉处理均采用硬件级加速，配合全域动态光影与色彩增强算法，为用户提供电影级别的高清视觉体验。
+            正式服提供最纯净、最稳定的核心体验，人类服则开放更多社交化与扩展性功能，满足不同用户的使用需求。
+            进入游戏前请确保已授予摄像头权限，否则无法启动现实捕捉模块。系统会自动引导权限开启，确保流程顺畅无阻。
+            界面设计遵循未来主义美学，采用玻璃态UI、动态光影、渐变色调与深度分层结构，营造极具科技感与高级感的视觉氛围。
+            每一个交互元素均配有精细的过渡动画与反馈效果，从点击按钮到画面加载，全程保持丝滑一致的高端体验。
+            背景采用深空渐变与星云粒子效果，不干扰主体内容，同时增强整体空间感与科技氛围。
+            本系统兼容移动端与桌面端，自适应布局保证在任何设备上都呈现完美的视觉比例与交互体验。
+            无论是手机、平板还是电脑，都能享受19000帧带来的极致流畅与超越现实的高清画质。
+            地球 Only 不仅是一个应用，更是一场关于现实、视觉与技术的极致探索。
+        </div>
     </div>
 
-    <div class="age-select">
-      <button class="btn btn-under-18" onclick="startQuiz('under18')">18 岁以下测评</button>
-      <button class="btn btn-adult" onclick="startQuiz('adult')">18 岁以上测评</button>
-    </div>
+    <script>
+        const video = document.getElementById('camera-view');
+        const startBtn = document.getElementById('startBtn');
+        const fps = document.getElementById('fps');
+        const loader = document.getElementById('loader');
+        const toast = document.getElementById('toast');
+        const serverCards = document.querySelectorAll('.server-card');
 
-    <button class="btn btn-history" onclick="showHistory()">查看历史记录</button>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+            }, 1600);
+        });
 
-    <div class="disclaimer">
-      本测评仅为状态参考，不构成医学诊断。<br>
-      如持续情绪低落、痛苦，请及时寻求专业心理或精神科帮助。
-    </div>
-  </div>
+        serverCards.forEach(card => {
+            card.addEventListener('click', () => {
+                serverCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
 
-  <!-- 问卷页面 -->
-  <div id="quiz-page">
-    <button class="btn-back" onclick="goBack()">← 返回首页</button>
-    <div class="quiz-header">
-      <h2 id="quiz-title">测评标题</h2>
-    </div>
-    <div class="questions-box" id="questions-box"></div>
-    <button class="btn-submit" onclick="submitQuiz()">提交测评，查看结果</button>
-  </div>
+        async function requestCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: 'environment',
+                        width: { ideal: 3840 },
+                        height: { ideal: 2160 }
+                    }
+                });
+                video.srcObject = stream;
+                return true;
+            } catch (err) {
+                console.warn('摄像头授权失败', err);
+                showToast('无法获取摄像头，请在设置中手动授权');
+                return false;
+            }
+        }
 
-  <!-- 结果页面 -->
-  <div id="result-page">
-    <div class="result-card">
-      <h2>测评结果</h2>
-      <div class="result-score" id="final-score">0</div>
-      <div class="result-level" id="result-level">等级判断中</div>
-      <div class="result-desc" id="result-desc"></div>
-    </div>
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-    <div class="advice-box">
-      <h3>专业建议</h3>
-      <div id="advice-content"></div>
-    </div>
+        startBtn.addEventListener('click', async () => {
+            startBtn.disabled = true;
+            startBtn.textContent = '正在启动摄像头...';
 
-    <div class="result-btns">
-      <button class="btn-to-home" onclick="goToHome()">返回首页</button>
-      <button class="btn-to-history" onclick="showHistory()">查看历史记录</button>
-    </div>
-  </div>
+            const granted = await requestCamera();
 
-  <!-- 历史记录页面 -->
-  <div id="history-page">
-    <button class="btn-back" onclick="goToHome()">← 返回首页</button>
-    <div class="history-list" id="history-list"></div>
-    <button class="btn-clear" onclick="clearHistory()">清空所有历史记录</button>
-  </div>
-</div>
+            if (granted) {
+                video.classList.add('active');
+                fps.classList.add('active');
+                startBtn.textContent = '游戏已启动';
+            } else {
+                startBtn.disabled = false;
+                startBtn.textContent = '开始游戏';
+            }
+        });
 
-<script>
-// 当前问卷类型
-let currentType = "";
-
-// 18岁以下题目（100题，完全不同）
-const under18Questions = [
-  { text: "我最近能按时睡觉，不会经常失眠", score:1 },
-  { text: "我早上起床不会觉得特别累、不想起", score:1 },
-  { text: "我吃饭正常，不会不想吃或暴饮暴食", score:1 },
-  { text: "我在学校能坐得住，不会特别烦躁", score:1 },
-  { text: "我和同学相处时，不会总觉得难受", score:1 },
-  { text: "我不会经常觉得自己很差、很没用", score:1 },
-  { text: "我不会经常想哭、心里很闷", score:1 },
-  { text: "我对玩游戏、看视频还有兴趣", score:1 },
-  { text: "我不会总想躲在房间，不想见人", score:1 },
-  { text: "我和家人能正常说话，不会完全不理", score:1 },
-  { text: "我不会经常头疼、肚子痛但查不出问题", score:1 },
-  { text: "我不会经常走神、注意力很难集中", score:1 },
-  { text: "我不会觉得未来没有希望", score:1 },
-  { text: "我不会经常发脾气、控制不住情绪", score:1 },
-  { text: "我不会觉得所有人都不喜欢我", score:1 },
-  { text: "我不会经常回忆不开心的事，走不出来", score:1 },
-  { text: "我不会觉得活着很累、很辛苦", score:1 },
-  { text: "我不会有想伤害自己的想法", score:1 },
-  { text: "我不会经常失眠、半夜醒来很多次", score:1 },
-  { text: "我不会每天都心情很差、开心不起来", score:1 },
-  { text: "我不会害怕上学、害怕去学校", score:1 },
-  { text: "我不会害怕和陌生人说话、害怕社交", score:1 },
-  { text: "我不会觉得自己给家人添麻烦", score:1 },
-  { text: "我不会经常自卑、觉得自己不如别人", score:1 },
-  { text: "我不会经常胸闷、喘不过气", score:1 },
-  { text: "我不会经常全身没劲、不想动", score:1 },
-  { text: "我不会讨厌自己、不喜欢自己", score:1 },
-  { text: "我不会经常胡思乱想、停不下来", score:1 },
-  { text: "我不会经常紧张、心慌、害怕", score:1 },
-  { text: "我不会不想说话、不想和任何人交流", score:1 },
-  { text: "我不会觉得做什么都没有意思", score:1 },
-  { text: "我不会经常很累、哪怕没做什么事", score:1 },
-  { text: "我不会经常忘记事情、脑子不好使", score:1 },
-  { text: "我不会害怕考试、害怕被批评", score:1 },
-  { text: "我不会觉得学习再努力也没用", score:1 },
-  { text: "我不会经常嫉妒别人、心里不平衡", score:1 },
-  { text: "我不会经常抱怨、觉得全世界都不好", score:1 },
-  { text: "我不会害怕被别人评价、被看不起", score:1 },
-  { text: "我不会经常孤独、没人理解我", score:1 },
-  { text: "我不会把所有错都怪在自己身上", score:1 },
-  { text: "我不会经常发呆、放空、没精神", score:1 },
-  { text: "我不会不想洗漱、不想收拾自己", score:1 },
-  { text: "我不会经常吃不下饭、没胃口", score:1 },
-  { text: "我不会体重明显变轻或变重", score:1 },
-  { text: "我不会经常手脚冰凉、身体不舒服", score:1 },
-  { text: "我不会经常做噩梦、睡不安稳", score:1 },
-  { text: "我不会害怕天黑、害怕一个人待着", score:1 },
-  { text: "我不会觉得没人关心我、在意我", score:1 },
-  { text: "我不会想离家出走、想逃离现在的生活", score:1 },
-  { text: "我不会经常委屈、憋在心里不说", score:1 },
-  { text: "我不会觉得自己很失败、什么都做不好", score:1 },
-  { text: "我不会不想和朋友一起玩", score:1 },
-  { text: "我不会害怕打电话、回消息", score:1 },
-  { text: "我不会看到人群就想躲开", score:1 },
-  { text: "我不会经常心里堵得慌、很难受", score:1 },
-  { text: "我不会觉得生活很灰暗、没有光", score:1 },
-  { text: "我不会经常想“要是没我就好了”", score:1 },
-  { text: "我不会有自杀、不想活了的想法", score:1 },
-  { text: "我不会觉得心理咨询、看病很丢人", score:1 },
-  { text: "我愿意在难受时告诉信任的人", score:1 },
-  { text: "我不会完全放弃自己、任由状态变差", score:1 },
-  { text: "我能接受自己不优秀、普通也没关系", score:1 },
-  { text: "我不会经常自责、内疚、怪自己", score:1 },
-  { text: "我不会每天都不开心、很难熬", score:1 },
-  { text: "我不会觉得一切都没有意义", score:1 },
-  { text: "我不会经常疲惫、不想动", score:1 },
-  { text: "我不会讨厌上学、讨厌学习", score:1 },
-  { text: "我不会害怕被老师批评、被同学嘲笑", score:1 },
-  { text: "我不会经常和家人吵架、闹矛盾", score:1 },
-  { text: "我不会封闭自己、不跟任何人来往", score:1 },
-  { text: "我不会觉得自己很奇怪、不正常", score:1 },
-  { text: "我不会经常莫名难过、掉眼泪", score:1 },
-  { text: "我不会经常烦躁、想摔东西", score:1 },
-  { text: "我不会觉得自己很胖、很丑、很差劲", score:1 },
-  { text: "我不会害怕照镜子、讨厌自己的样子", score:1 },
-  { text: "我不会经常失眠、熬夜到很晚", score:1 },
-  { text: "我不会不想起床、不想面对新的一天", score:1 },
-  { text: "我不会觉得自己是多余的、不该存在", score:1 },
-  { text: "我不会经常身体痛、查不出原因", score:1 },
-  { text: "我不会经常恶心、肠胃不舒服", score:1 },
-  { text: "我不会不想出门、只想待在房间", score:1 },
-  { text: "我不会害怕热闹、害怕人多的地方", score:1 },
-  { text: "我不会觉得朋友都在疏远我", score:1 },
-  { text: "我不会经常怀疑自己、不相信自己", score:1 },
-  { text: "我不会觉得努力没用、反正都一样", score:1 },
-  { text: "我不会经常发呆、浪费时间", score:1 },
-  { text: "我不会经常心里慌、不安", score:1 },
-  { text: "我不会觉得没人懂我、太孤独", score:1 },
-  { text: "我不会经常想伤害自己缓解痛苦", score:1 },
-  { text: "我不会经常想死亡、想解脱", score:1 },
-  { text: "我能每天做一点小事，比如收拾桌子", score:1 },
-  { text: "我愿意给自己一点时间慢慢变好", score:1 },
-  { text: "我不会觉得永远都好不了、彻底绝望", score:1 },
-  { text: "我相信自己会慢慢好起来", score:1 },
-  { text: "我不会完全不吃饭、伤害自己身体", score:1 },
-  { text: "我不会每天都很累、熬不下去", score:1 },
-  { text: "我不会觉得生活没有盼头", score:1 },
-  { text: "我愿意在很难受时寻求帮助", score:1 }
-];
-
-// 18岁以上成人题目（100题，和上面完全不同）
-const adultQuestions = [
-  { text: "我近期睡眠规律，没有明显失眠或嗜睡", score:1 },
-  { text: "我不会经常早醒、难以再次入睡", score:1 },
-  { text: "我的食欲基本正常，无明显下降或激增", score:1 },
-  { text: "我体重近期无异常、快速波动", score:1 },
-  { text: "我能感受到日常中的愉悦感，不会持续麻木", score:1 },
-  { text: "我对工作、学习、爱好仍有基本兴趣", score:1 },
-  { text: "我不会长期感到精力不足、极度疲劳", score:1 },
-  { text: "我做事不会明显迟缓、反应变慢", score:1 },
-  { text: "我不会坐立不安、难以平静", score:1 },
-  { text: "我不会长期自我否定、觉得自己毫无价值", score:1 },
-  { text: "我不会过度自责，把所有问题归咎自己", score:1 },
-  { text: "我不会经常注意力下降、无法专注", score:1 },
-  { text: "我不会反复思考死亡、自杀相关内容", score:1 },
-  { text: "我没有具体的自杀计划或行为", score:1 },
-  { text: "我不会每天大部分时间情绪低落、想哭", score:1 },
-  { text: "我不会对以前喜欢的活动完全失去兴趣", score:1 },
-  { text: "我能正常社交，不会刻意回避所有人", score:1 },
-  { text: "我不会觉得所有人际关系都疲惫、无意义", score:1 },
-  { text: "我不会经常胸闷、心慌、查无器质性问题", score:1 },
-  { text: "我不会经常头痛、腰酸、全身不明原因不适", score:1 },
-  { text: "我不会长期消化紊乱、肠胃不适", score:1 },
-  { text: "我不会经常手抖、出汗、莫名恐慌", score:1 },
-  { text: "我不会觉得未来无望、一切没有意义", score:1 },
-  { text: "我不会觉得努力改变不了任何事", score:1 },
-  { text: "我不会长期封闭自己、不与家人沟通", score:1 },
-  { text: "我不会害怕亲密关系、害怕被了解", score:1 },
-  { text: "我不会过度依赖酒精、熬夜麻痹情绪", score:1 },
-  { text: "我不会有自伤、自残行为缓解痛苦", score:1 },
-  { text: "我不会经常情绪崩溃、难以控制", score:1 },
-  { text: "我不会长期暴躁、易怒、伤害身边人", score:1 },
-  { text: "我不会经常记忆衰退、频繁忘事", score:1 },
-  { text: "我不会做事拖延严重、无法完成基本任务", score:1 },
-  { text: "我能正常上班/学习，不会完全逃避", score:1 },
-  { text: "我不会因情绪长期请假、旷工、荒废生活", score:1 },
-  { text: "我不会害怕接电话、回消息、社交软件", score:1 },
-  { text: "我不会看到信息就焦虑、拖延回复", score:1 },
-  { text: "我不会在人群中依然感到极度孤独", score:1 },
-  { text: "我不会嫉妒他人生活、过度自我攻击", score:1 },
-  { text: "我能接纳自己普通、不完美、不优秀", score:1 },
-  { text: "我不会长期沉浸过去、反复内耗", score:1 },
-  { text: "我不会每天胡思乱想、无法停止", score:1 },
-  { text: "我不会觉得人生彻底失败、无可挽回", score:1 },
-  { text: "我不会对所有人都失望、不信任", score:1 },
-  { text: "我不会害怕依赖他人、也不抗拒被依赖", score:1 },
-  { text: "我不会觉得恋爱、友情全都没有意义", score:1 },
-  { text: "我能感受自然、阳光、微风带来的平静", score:1 },
-  { text: "我不会完全放弃娱乐、放松、自我照顾", score:1 },
-  { text: "我偶尔会主动散步、听歌、简单放松", score:1 },
-  { text: "我不会长期处于紧绷、无法放松状态", score:1 },
-  { text: "我能找到轻微缓解情绪的方式，不会完全无助", score:1 },
-  { text: "我愿意为自己维持基本生活：吃饭、睡觉、洗漱", score:1 },
-  { text: "我不会完全不管健康、任由身体垮掉", score:1 },
-  { text: "我不认为心理咨询、就医是丢人的事", score:1 },
-  { text: "我愿意在状态恶劣时寻求专业帮助", score:1 },
-  { text: "我不会彻底绝望、相信自己永远无法好转", score:1 },
-  { text: "我能允许自己低落，不因此加倍焦虑", score:1 },
-  { text: "我允许自己脆弱、不必一直坚强", score:1 },
-  { text: "我愿意给自己时间，慢慢调整恢复", score:1 },
-  { text: "我不会长期失眠、昼夜颠倒、破坏节律", score:1 },
-  { text: "我不会长期不吃正餐、饮食极度混乱", score:1 },
-  { text: "我不会长期不洗澡、不换衣、放弃自我形象", score:1 },
-  { text: "我不会完全不出门、失去基本社会功能", score:1 },
-  { text: "我不会觉得自己是所有人的负担", score:1 },
-  { text: "我不会经常莫名流泪、情绪压抑到极点", score:1 },
-  { text: "我不会经常感到胸口发闷、像压着石头", score:1 },
-  { text: "我不会经常有濒死感、强烈失控感", score:1 },
-  { text: "我不会把所有负面评价全部当真、内化", score:1 },
-  { text: "我不会长期自我攻击、内心对话极端刻薄", score:1 },
-  { text: "我不会在做重大决定时完全被情绪控制", score:1 },
-  { text: "我不会长期与世隔绝、切断所有社交", score:1 },
-  { text: "我不会对任何事都无所谓、彻底麻木", score:1 },
-  { text: "我不会觉得世界灰暗、没有任何值得期待", score:1 },
-  { text: "我不会经常想“消失就好了”“解脱就好了”", score:1 },
-  { text: "我不会用极端方式逃避现实", score:1 },
-  { text: "我能接受别人关心，不完全拒绝善意", score:1 },
-  { text: "我不会认为所有关心都是虚伪、有目的", score:1 },
-  { text: "我对生活仍有一点点掌控感和期待", score:1 },
-  { text: "我不会完全放弃自我成长、自我照顾", score:1 },
-  { text: "我不会长期内疚、无法原谅自己", score:1 },
-  { text: "我不会反复回想创伤、痛苦无法释怀", score:1 },
-  { text: "我不会长期处于焦虑、无法放松", score:1 },
-  { text: "我不会经常莫名害怕、没有具体对象", score:1 },
-  { text: "我不会因情绪影响基本工作、学习能力", score:1 },
-  { text: "我不会长期请假、逃避责任与现实", score:1 },
-  { text: "我不会害怕人群、害怕公共场所", score:1 },
-  { text: "我不会长期宅家、拒绝一切外出", score:1 },
-  { text: "我不会经常对比他人、加剧自我否定", score:1 },
-  { text: "我不会长期抱怨、否定一切人和事", score:1 },
-  { text: "我不会恐惧亲密、害怕被看穿脆弱", score:1 },
-  { text: "我不会觉得所有关系最终都会伤害自己", score:1 },
-  { text: "我不会完全失去表达欲、不想说一句话", score:1 },
-  { text: "我不会长期疲惫到连洗漱都觉得费力", score:1 },
-  { text: "我不会经常脑子空白、思考能力下降", score:1 },
-  { text: "我不会出现明显幻觉、不真实感", score:1 },
-  { text: "我相信自己有机会慢慢好转、恢复状态", score:1 },
-  { text: "我不会彻底放弃自己、任由状态持续恶化", score:1 }
-];
-
-// 开始问卷
-function startQuiz(type) {
-  currentType = type;
-  document.getElementById("home").style.display = "none";
-  document.getElementById("quiz-page").style.display = "block";
-  document.getElementById("result-page").style.display = "none";
-  document.getElementById("history-page").style.display = "none";
-
-  let title = type === "under18" ? "18 岁以下抑郁状态测评（100题）" : "18 岁以上成人抑郁状态测评（100题）";
-  document.getElementById("quiz-title").innerText = title;
-
-  let qBox = document.getElementById("questions-box");
-  qBox.innerHTML = "";
-
-  let list = type === "under18" ? under18Questions : adultQuestions;
-
-  list.forEach((item, index) => {
-    let div = document.createElement("div");
-    div.className = "question-item";
-    div.innerHTML = `
-      <div class="question-text">${index + 1}. ${item.text}</div>
-      <div class="options">
-        <label class="option"><input type="radio" name="q${index}" value="1" required> 完全符合</label>
-        <label class="option"><input type="radio" name="q${index}" value="0"> 不完全符合</label>
-      </div>
-    `;
-    qBox.appendChild(div);
-  });
-}
-
-// 提交问卷
-function submitQuiz() {
-  let list = currentType === "under18" ? under18Questions : adultQuestions;
-  let total = 0;
-
-  list.forEach((_, index) => {
-    let checked = document.querySelector(`input[name="q${index}"]:checked`);
-    if (checked) {
-      total += parseInt(checked.value);
-    }
-  });
-
-  // 按你指定的分级
-  let levelText = "";
-  let levelColor = "";
-  let advice = "";
-
-  if (total >= 90) {
-    levelText = "完全无抑郁";
-    levelColor = "#16a34a";
-    advice = "你目前情绪状态非常稳定，生活节奏良好，几乎没有抑郁倾向。请继续保持规律作息、适度运动、正常社交，遇到压力及时疏导即可。";
-  } else if (total >= 80) {
-    levelText = "轻度抑郁";
-    levelColor = "#f59e0b";
-    advice = "你存在轻度抑郁情绪，可能最近压力较大、休息不足。建议减少内耗，多休息，多做让自己放松的事，适当倾诉，一般通过自我调整可以明显改善。";
-  } else if (total >= 70) {
-    levelText = "中度抑郁";
-    levelColor = "#ea580c";
-    advice = "你处于中度抑郁状态，情绪低落、精力下降、兴趣减退比较明显。建议减少高强度压力，保证睡眠，多和信任的人沟通，必要时寻求心理咨询帮助。";
-  } else if (total >= 60) {
-    levelText = "中上度抑郁";
-    levelColor = "#dc2626";
-    advice = "你的抑郁状态比较明显，已经影响到日常心情与生活。请务必重视：不要独自硬扛，尽量寻求家人、朋友陪伴，强烈建议寻求专业心理或精神科帮助。";
-  } else {
-    levelText = "高度抑郁";
-    levelColor = "#b91c1c";
-    advice = "你目前处于高度抑郁状态，情绪、身体、生活都受到明显影响，非常痛苦。请立刻停止自我攻击，尽快联系家人、信任的人，并前往专业机构寻求帮助，你值得被好好对待。";
-  }
-
-  // 显示结果
-  document.getElementById("quiz-page").style.display = "none";
-  document.getElementById("result-page").style.display = "block";
-  document.getElementById("final-score").innerText = total;
-  document.getElementById("final-score").style.color = levelColor;
-  document.getElementById("result-level").innerText = levelText;
-  document.getElementById("result-level").style.color = levelColor;
-  document.getElementById("result-desc").innerText = `总分：${total} 分，共 100 题`;
-  document.getElementById("advice-content").innerHTML = `<p>${advice}</p>`;
-
-  // 保存到本地历史记录
-  saveHistory(currentType, total, levelText);
-}
-
-// 保存历史（JS + localStorage）
-function saveHistory(type, score, level) {
-  let history = JSON.parse(localStorage.getItem("depressionTestHistory")) || [];
-  let typeName = type === "under18" ? "18岁以下版" : "18岁以上成人版";
-  let now = new Date();
-  let timeStr = now.toLocaleString();
-
-  history.unshift({
-    type: typeName,
-    score: score,
-    level: level,
-    time: timeStr
-  });
-
-  localStorage.setItem("depressionTestHistory", JSON.stringify(history));
-}
-
-// 显示历史记录
-function showHistory() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("quiz-page").style.display = "none";
-  document.getElementById("result-page").style.display = "none";
-  document.getElementById("history-page").style.display = "block";
-
-  let history = JSON.parse(localStorage.getItem("depressionTestHistory")) || [];
-  let listEl = document.getElementById("history-list");
-
-  if (history.length === 0) {
-    listEl.innerHTML = '<div class="empty-history">暂无测评记录</div>';
-    return;
-  }
-
-  let html = "";
-  history.forEach(item => {
-    html += `
-      <div class="history-item">
-        <div class="history-type">${item.type}</div>
-        <div class="history-time">${item.time}</div>
-        <div class="history-score">得分：${item.score} 分</div>
-        <div class="history-level">结果：${item.level}</div>
-      </div>
-    `;
-  });
-
-  listEl.innerHTML = html;
-}
-
-// 清空历史
-function clearHistory() {
-  if (confirm("确定要清空所有历史记录吗？此操作不可恢复。")) {
-    localStorage.removeItem("depressionTestHistory");
-    showHistory();
-  }
-}
-
-// 返回首页
-function goToHome() {
-  document.getElementById("home").style.display = "block";
-  document.getElementById("quiz-page").style.display = "none";
-  document.getElementById("result-page").style.display = "none";
-  document.getElementById("history-page").style.display = "none";
-}
-
-// 返回（从问卷回首页）
-function goBack() {
-  goToHome();
-}
-</script>
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                showToast('正在请求摄像头权限');
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
-
